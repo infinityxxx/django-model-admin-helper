@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.utils.datastructures import SortedDict
 from django.http import HttpResponseRedirect
 # from django.contrib.admin.options import RenameBaseModelAdminMethods
+from django.utils.deprecation import RenameMethodsBase
 
 try:
     from functools import update_wrapper
@@ -58,7 +59,7 @@ class ButtonableModelAdmin(admin.ModelAdmin):
         ) + super(ButtonableModelAdmin, self).get_urls()
     
 
-class ModelAdminWithForeignKeyLinksMetaclass(type):
+class ModelAdminWithForeignKeyLinksMetaclass(RenameMethodsBase):
 
     def __new__(cls, name, bases, attrs):
         new_class = super(ModelAdminWithForeignKeyLinksMetaclass, cls).__new__(cls, name, bases, attrs)
