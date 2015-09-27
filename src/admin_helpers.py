@@ -59,7 +59,7 @@ class ButtonableModelAdmin(admin.ModelAdmin):
         ) + super(ButtonableModelAdmin, self).get_urls()
     
 
-class ModelAdminWithForeignKeyLinksMetaclass(RenameMethodsBase):
+class ModelAdminWithForeignKeyLinksMetaclass(BaseModelAdmin):
 
     def __new__(cls, name, bases, attrs):
         new_class = super(ModelAdminWithForeignKeyLinksMetaclass, cls).__new__(cls, name, bases, attrs)
