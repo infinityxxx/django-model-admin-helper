@@ -13,7 +13,7 @@ except ImportError:
     from django.utils.functional import update_wrapper
 
 
-class RenameBaseModelAdminMethods(forms.MediaDefiningClass, RenameMethodsBase):
+class RenameBaseModelAdminMethods(MediaDefiningClass, RenameMethodsBase):
     renamed_methods = (
         ('queryset', 'get_queryset', PendingDeprecationWarning),
     )
