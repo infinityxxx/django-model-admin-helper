@@ -5,11 +5,19 @@ from django.utils.datastructures import SortedDict
 from django.http import HttpResponseRedirect
 # from django.contrib.admin.options import RenameBaseModelAdminMethods
 from django.contrib.admin.options import BaseModelAdmin
+from django.utils.deprecation import RenameMethodsBase
+from django.forms.widgets import MediaDefiningClass
 
 try:
     from functools import update_wrapper
 except ImportError:
     from django.utils.functional import update_wrapper
+
+
+class RenameBaseModelAdminMethods(forms.MediaDefiningClass, RenameMethodsBase):
+    renamed_methods = (
+        ('queryset', 'get_queryset', PendingDeprecationWarning),
+    )
 
 
 class ButtonableModelAdmin(admin.ModelAdmin):
@@ -59,7 +67,7 @@ class ButtonableModelAdmin(admin.ModelAdmin):
         ) + super(ButtonableModelAdmin, self).get_urls()
     
 
-class ModelAdminWithForeignKeyLinksMetaclass(RenameMethodsBase):
+class ModelAdminWithForeignKeyLinksMetaclass(RenameBaseModelAdminMethods):
 
     def __new__(cls, name, bases, attrs):
         new_class = super(ModelAdminWithForeignKeyLinksMetaclass, cls).__new__(cls, name, bases, attrs)
