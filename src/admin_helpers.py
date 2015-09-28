@@ -3,7 +3,6 @@ from functools import partial
 from django.contrib import admin
 from django.utils.datastructures import SortedDict
 from django.http import HttpResponseRedirect
-# from django.contrib.admin.options import RenameBaseModelAdminMethods
 from django.contrib.admin.options import BaseModelAdmin
 from django.utils.deprecation import RenameMethodsBase
 from django.forms.widgets import MediaDefiningClass
@@ -68,6 +67,7 @@ class ButtonableModelAdmin(admin.ModelAdmin):
     
 
 class ModelAdminWithForeignKeyLinksMetaclass(RenameBaseModelAdminMethods):
+
 
     def __new__(cls, name, bases, attrs):
         new_class = super(ModelAdminWithForeignKeyLinksMetaclass, cls).__new__(cls, name, bases, attrs)
