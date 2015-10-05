@@ -75,7 +75,7 @@ class ModelAdminWithForeignKeyLinksMetaclass(RenameBaseModelAdminMethods):
         def foreign_key_link(instance, field):
             target = getattr(instance, field)
             return u'<a href="../../%s/%s/%s/">%s</a>' % (
-                target._meta.app_label, target._meta.module_name, target.pk, unicode(target))
+                target._meta.app_label, target._meta.model_name, target.pk, unicode(target))
 
         for col in new_class.list_display:
             if col[:8] == 'link_to_':
