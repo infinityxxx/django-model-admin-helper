@@ -1,7 +1,7 @@
+from collections import OrderedDict
 from functools import partial
 
 from django.contrib import admin
-from django.utils.datastructures import SortedDict
 from django.http import HttpResponseRedirect
 from django.contrib.admin.options import BaseModelAdmin
 from django.utils.deprecation import RenameMethodsBase
@@ -43,7 +43,7 @@ class ButtonableModelAdmin(admin.ModelAdmin):
         Each button may assign 'condition', which chould be callable with following attrs: self, request, obj
         """
 
-        buttons = SortedDict()
+        buttons = OrderedDict()
         for name in self.buttons:
             handler = getattr(self, name)
             if getattr(handler, 'condition', lambda self, request, obj: True)(self, request, obj):
